@@ -1,0 +1,7 @@
+apply plugin: 'kotlin'
+apply plugin: 'war'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly "javax:javaee-api:7.0"
+}

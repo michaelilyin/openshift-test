@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+  demo:
+    build:
+      context: "./api-service"
+      dockerfile: "Dockerfile"
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+    environment:
+      - source-service=http://source:8080/source-service-1.0-SNAPSHOT
+    links:
+      - source
+  source:
+    build:
+      context: "./source-service"
+      dockerfile: "Dockerfile"
