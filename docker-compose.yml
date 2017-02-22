@@ -3,10 +3,8 @@ services:
   demo:
     build:
       context: "./api-service"
-      dockerfile: "Dockerfile"
     ports:
       - "8080:8080"
-      - "9990:9990"
     environment:
       - source-service=http://source:8080/source-service-1.0-SNAPSHOT
     links:
@@ -14,4 +12,3 @@ services:
   source:
     build:
       context: "./source-service"
-      dockerfile: "Dockerfile"
