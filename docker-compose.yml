@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - source-service=http://source:8080/source-service-1.0-SNAPSHOT
+      - source_service=http://source:8080/source-service-1.0-SNAPSHOT
     links:
       - source
   source:

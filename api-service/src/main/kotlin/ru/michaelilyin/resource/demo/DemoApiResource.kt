@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType
 open class DemoApiResource {
 
     private val client = ClientBuilder.newClient()
-    private val url = System.getenv("source-service")
+    private val url = System.getenv("source_service")
 
     @GET
     fun getData(): String {
