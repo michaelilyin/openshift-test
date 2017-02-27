@@ -1,5 +1,6 @@
 package ru.michaelilyin.resource.demo
 
+import ru.michaelilyin.use
 import javax.ejb.Stateless
 import javax.ws.rs.GET
 import javax.ws.rs.Path
@@ -18,11 +19,9 @@ open class DemoApiResource {
     @GET
     fun getData(): String {
         val sourceResponse = client.target("$url/api/source").request().get()
-        try {
-            val response = sourceResponse.readEntity(String::class.java)
-            return "external service [$url] get the following data from source service: [$response]"
-        } finally {
-            sourceResponse.close()
+        return sourceResponse.use {
+            val response = it.readEntity(String::class.java)
+            "external service [$url] get the following data from source service: [$response]"
         }
     }
 }

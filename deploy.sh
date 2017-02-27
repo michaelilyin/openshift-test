@@ -51,11 +51,11 @@ mkdir -p ~/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
 if [ -z "${OPENSHIFT_TOKEN}" ]; then
-    oc login ${OPENSHIFT_HOST} -u ${OPENSHIFT_USER} -p ${OPENSHIFT_PASSWORD} > /dev/null \
-        && echo "login successful for ${OPENSHIFT_HOST}" || (echo "Can not login ${OPENSHIFT_HOST}"; exit 1)
+    (oc login ${OPENSHIFT_HOST} -u ${OPENSHIFT_USER} -p ${OPENSHIFT_PASSWORD} > /dev/null \
+        && echo "login successful for ${OPENSHIFT_HOST}") || (echo "Can not login ${OPENSHIFT_HOST}"; exit 1)
 else
-    oc login ${OPENSHIFT_HOST} --token ${OPENSHIFT_TOKEN} > /dev/null \
-        && echo "login successful for ${OPENSHIFT_HOST}" || (echo "Can not login ${OPENSHIFT_HOST}"; exit 1)
+    (oc login ${OPENSHIFT_HOST} --token ${OPENSHIFT_TOKEN} > /dev/null \
+        && echo "login successful for ${OPENSHIFT_HOST}") || (echo "Can not login ${OPENSHIFT_HOST}"; exit 1)
 fi
 
 oc project ${OPENSHIFT_PROJECT} || (echo "Create new project ${OPENSHIFT_PROJECT}"; oc new-project ${OPENSHIFT_PROJECT})
