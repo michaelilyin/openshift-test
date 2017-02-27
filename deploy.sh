@@ -21,6 +21,7 @@ function configure_deployment {
     if [ $? -ne 0 ]; then
         echo "Create deployment configuration for $1"
         oc create -n ${OPENSHIFT_PROJECT} -f ./openshift/$1-deployment.yml
+        oc deploy $1 --cancel
     else
         echo "Update deployment configuration for $1"
         oc replace -n ${OPENSHIFT_PROJECT} -f ./openshift/$1-deployment.yml
