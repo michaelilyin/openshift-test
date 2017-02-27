@@ -20,17 +20,17 @@ spec:
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: api-service-1.0-SNAPSHOT/api/ready
+            path: /api-service-1.0-SNAPSHOT/api/ready
             port: 8080
           initialDelaySeconds: 15
           timeoutSeconds: 1
         livenessProbe:
           httpGet:
-            path: api-service-1.0-SNAPSHOT/api/live
+            path: /api-service-1.0-SNAPSHOT/api/live
             port: 8080
           initialDelaySeconds: 15
           timeoutSeconds: 1
-      restartPolicy: Always
+      restartPolicy: OnFailure
   replicas: 1
   selector:
     name: api-service
