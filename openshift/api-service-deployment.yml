@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: api-service
+spec:
+  template:
+    metadata:
+      labels:
+        name: api-service
+    spec:
+      containers:
+      - env:
+        - name: source_service
+          value: http://source-service:8080/source-service-1.0-SNAPSHOT
+        name: api-service
+        image: api-service-image
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+      restartPolicy: Always
+  replicas: 1
+  selector:
+    name: api-service
+  strategy:
+    type: Rolling
+  triggers:
+  - type: ImageChange
+    imageChangeParams:
+      automatic: true
+      containerNames:
+      - api-service
+      from:
+        kind: ImageStreamTag
+        name: api-service-image:latest
+  - type: ConfigChange
