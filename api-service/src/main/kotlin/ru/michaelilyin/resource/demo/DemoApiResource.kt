@@ -17,7 +17,12 @@ open class DemoApiResource {
 
     @GET
     fun getData(): String {
-        val response = client.target("$url/api/source").request().get().readEntity(String::class.java)
-        return "external service [$url] get the following data from source service: [$response]"
+        val sourceResponse = client.target("$url/api/source").request().get()
+        try {
+            val response = sourceResponse.readEntity(String::class.java)
+            return "external service [$url] get the following data from source service: [$response]"
+        } finally {
+            sourceResponse.close()
+        }
     }
 }
