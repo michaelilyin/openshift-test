@@ -28,12 +28,16 @@ open class StatusResource {
     @GET
     @Path("/ready")
     open fun getReady(): Response {
-        val sourceResponse = client.target("$url/api/ready").request().get()
-        return sourceResponse.use {
-            if (sourceResponse.status != 200)
-                Response.status(503).build()
-            else
-                Response.ok().build()
+        try {
+            val sourceResponse = client.target("$url/api/ready").request().get()
+            return sourceResponse.use {
+                if (sourceResponse.status != 200)
+                    Response.status(503).build()
+                else
+                    Response.ok().build()
+            }
+        } catch (e: Exception) {
+            return Response.status(503).build()
         }
     }
 

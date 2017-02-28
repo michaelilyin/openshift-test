@@ -12,3 +12,5 @@ services:
   source:
     build:
       context: "./source-service"
+  healthcheck:
+        test: "Applications/apache-karaf-3.0.5/bin/status"
