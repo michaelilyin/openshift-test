@@ -20,13 +20,13 @@ spec:
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: /api-service-1.0-SNAPSHOT/api/ready
+            path: /api-service-1.0-SNAPSHOT/api/status/ready
             port: 8080
-          initialDelaySeconds: 60
-          timeoutSeconds: 5
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
         livenessProbe:
           httpGet:
-            path: /api-service-1.0-SNAPSHOT/api/live
+            path: /api-service-1.0-SNAPSHOT/api/status/live
             port: 8080
           initialDelaySeconds: 60
           timeoutSeconds: 5

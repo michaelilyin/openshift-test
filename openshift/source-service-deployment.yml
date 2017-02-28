@@ -17,18 +17,18 @@ spec:
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: /source-service-1.0-SNAPSHOT/api/ready
+            path: /source-service-1.0-SNAPSHOT/api/status/ready
             port: 8080
-          initialDelaySeconds: 60
-          timeoutSeconds: 5
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
         livenessProbe:
           httpGet:
-            path: /source-service-1.0-SNAPSHOT/api/live
+            path: /source-service-1.0-SNAPSHOT/status/api/live
             port: 8080
           initialDelaySeconds: 60
           timeoutSeconds: 5
       restartPolicy: Always
-  replicas: 2
+  replicas: 1
   selector:
     name: source-service
   strategy:
