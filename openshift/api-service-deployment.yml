@@ -30,7 +30,7 @@ spec:
             port: 8080
           initialDelaySeconds: 60
           timeoutSeconds: 5
-      restartPolicy: OnFailure
+      restartPolicy: Always
   replicas: 1
   selector:
     name: api-service
